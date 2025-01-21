@@ -1,8 +1,7 @@
 PANDOC ?= pandoc
+PANDOC_OPTIONS = -f gfm+definition_lists
 
-MANSECTION ?= 1
+.SUFFIXES: .1.md .1 .5.md .5
 
-MANPAGE.md = $(PANDOC) --standalone $(PANDOCFLAGS) --to man
-
-%.$(MANSECTION): %.$(MANSECTION).md
-	$(MANPAGE.md) $< -o $@
+.1.md.1 .5.md.5:
+	$(PANDOC) --standalone $(PANDOC_OPTIONS) --to man -o $@ $<
